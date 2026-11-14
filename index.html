@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستم مدیریت استراحت پشتیبانی - طلاین</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            direction: rtl;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            color: #121212;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .brand {
+            background: #121212;
+            color: #d4af37;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #d4af37;
+        }
+        .content {
+            padding: 25px;
+        }
+        .section-title {
+            color: #d4af37;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+        }
+        .names-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .name-card {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-right: 4px solid #d4af37;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .name-card:hover {
+            border-color: #d4af37;
+            background: #333;
+        }
+        .note {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px dashed #d4af37;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        .note code {
+            color: #d4af37;
+            background: #222;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>سیستم مدیریت استراحت پشتیبانی</h1>
+        <div class="brand">طلایــن</div>
+    </header>
+    
+    <div class="content">
+        <div class="section-title">لیست کارشناسان پشتیبانی</div>
+        
+        <!-- بخش اسامی: هر زمان خواستید اسم اضافه یا کم کنید، کافی است یک خط مثل همین‌ها کپی کنید یا تغییر دهید -->
+        <div class="names-grid">
+            <div class="name-card">عباس یخی</div>
+            <div class="name-card">رضا شیرزاد</div>
+            <div class="name-card">سمیه گرجی</div>
+            <div class="name-card">علی رضایی</div>
+            <div class="name-card">زهرا مرادی</div>
+            <div class="name-card">محمد کریمی</div>
+            <div class="name-card">فاطمه احمدی</div>
+            <div class="name-card">حسن اکبری</div>
+            <div class="name-card">مریم حسینی</div>
+            <div class="name-card">امیر قادری</div>
+            <div class="name-card">سارا ناصری</div>
+            <div class="name-card">محمد امین‌پور</div>
+            <div class="name-card">نیلوفر راد</div>
+            <div class="name-card">پیمان طاهری</div>
+            <div class="name-card">بهار فروتن</div>
+            <div class="name-card">میلاد صیادی</div>
+            <div class="name-card">مینا بیات</div>
+            <div class="name-card">دانیال رستمی</div>
+            <div class="name-card">رویا سعادت</div>
+            <div class="name-card">کامران پارسا</div>
+            <div class="name-card">نرگس مهدوی</div>
+            <div class="name-card">آرش فروهر</div>
+            <div class="name-card">الهام صفری</div>
+        </div>
+
+        <div class="note">
+            <strong>راهنمای ویرایش:</strong> برای تغییر یا اضافه کردن اسامی در آینده، کافی است فایل <code>index.html</code> را با یک ویرایشگر متن (مثل Notepad) باز کنید و نام‌ها را درون تگ‌های <code>&lt;div class="name-card"&gt;</code> تغییر دهید یا اضافه کنید.
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
