@@ -1,10 +1,9 @@
-HTML
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سیستم مدیریت استراحت پشتیبانی</title>
+    <title>پشتیبانی طلاین - مدیریت استراحت کارشناسان</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap');
         
@@ -16,28 +15,62 @@ HTML
         }
 
         body {
-            background-color: #f3f4f6;
-            color: #1f2937;
+            background-color: #121212;
+            color: #f3f4f6;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .container {
+        .brand-header {
             width: 100%;
             max-width: 900px;
             background: #ffffff;
+            border-bottom: 4px solid #eab308;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.15);
+        }
+
+        .brand-title {
+            color: #1f2937;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-right: 3px solid #eab308;
+            padding-right: 12px;
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1f2937;
+            letter-spacing: -1px;
+        }
+
+        .brand-logo span {
+            color: #eab308;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #1e1e1e;
             padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            border-top: none;
         }
 
         h1 {
             text-align: center;
             margin-bottom: 25px;
-            color: #111827;
-            font-size: 1.5rem;
+            color: #facc15;
+            font-size: 1.4rem;
         }
 
         .control-panel {
@@ -56,35 +89,37 @@ HTML
         input, select, button {
             padding: 12px 16px;
             border-radius: 10px;
-            border: 1px solid #d1d5db;
+            border: 1px solid #444;
+            background-color: #2a2a2a;
+            color: #fff;
             font-size: 1rem;
             outline: none;
             transition: all 0.2s;
         }
 
         input:focus, select:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            border-color: #eab308;
+            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.2);
         }
 
         .btn-start {
-            background-color: #2563eb;
-            color: white;
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            color: #111;
             border: none;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
         }
 
         .btn-start:hover {
-            background-color: #1d4ed8;
+            background: linear-gradient(135deg, #facc15, #eab308);
         }
 
         .section-title {
             font-size: 1.1rem;
             font-weight: 700;
             margin: 20px 0 12px;
-            color: #374151;
-            border-bottom: 2px solid #e5e7eb;
+            color: #facc15;
+            border-bottom: 2px solid #333;
             padding-bottom: 8px;
         }
 
@@ -96,8 +131,8 @@ HTML
         }
 
         .card {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
+            background: #262626;
+            border: 1px solid #404040;
             border-radius: 12px;
             padding: 16px;
             display: flex;
@@ -107,8 +142,8 @@ HTML
         }
 
         .card.overtime {
-            background: #fef2f2;
-            border-color: #fecaca;
+            background: #3b1111;
+            border-color: #ef4444;
             animation: pulse 2s infinite;
         }
 
@@ -128,20 +163,23 @@ HTML
         .agent-name {
             font-weight: 700;
             font-size: 1.1rem;
+            color: #fff;
         }
 
         .badge {
-            background: #dbeafe;
-            color: #1e40af;
+            background: #332701;
+            color: #facc15;
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
+            border: 1px solid #854d0e;
         }
 
         .card.overtime .badge {
-            background: #fee2e2;
-            color: #991b1b;
+            background: #501313;
+            color: #fca5a5;
+            border-color: #991b1b;
         }
 
         .timer {
@@ -150,31 +188,33 @@ HTML
             text-align: center;
             margin: 10px 0;
             direction: ltr;
-            color: #1e3a8a;
+            color: #fde047;
         }
 
         .card.overtime .timer {
-            color: #dc2626;
+            color: #f87171;
         }
 
         .time-info {
             font-size: 0.85rem;
-            color: #4b5563;
+            color: #9ca3af;
             margin-bottom: 12px;
             text-align: center;
         }
 
         .btn-return {
-            background-color: #10b981;
+            background-color: #059669;
             color: white;
             border: none;
             width: 100%;
             font-weight: 600;
             cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
         }
 
         .btn-return:hover {
-            background-color: #059669;
+            background-color: #047857;
         }
 
         .table-wrapper {
@@ -189,224 +229,16 @@ HTML
 
         th, td {
             padding: 12px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #333;
             font-size: 0.95rem;
         }
 
         th {
-            background-color: #f9fafb;
+            background-color: #262626;
             font-weight: 600;
-            color: #4b5563;
+            color: #eab308;
         }
 
         .status-ok {
-            color: #059669;
-            font-weight: 600;
-        }
-
-        .status-late {
-            color: #dc2626;
-            font-weight: 600;
-        }
-
-        .header-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .btn-clear {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            font-size: 0.85rem;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .btn-clear:hover {
-            background: #dc2626;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>ثبت ورود و خروج استراحت کارشناسان پشتیبانی</h1>
-
-    <div class="control-panel">
-        <input type="text" id="agentName" placeholder="نام و نام خانوادگی کارشناس..." autocomplete="off">
-        <select id="restDuration">
-            <option value="5">استراحت (۵ دقیقه)</option>
-            <option value="10" selected>استراحت (۱۰ دقیقه)</option>
-            <option value="20">استراحت (۲۰ دقیقه)</option>
-        </select>
-        <button class="btn-start" onclick="startRest()">شروع استراحت</button>
-    </div>
-
-    <div class="section-title">کارشناسان در حال استراحت</div>
-    <div class="active-list" id="activeList"></div>
-
-    <div class="header-actions section-title">
-        <span>گزارش ترددهای امروز</span>
-        <button class="btn-clear" onclick="clearLogs()">پاک کردن تاریخچه</button>
-    </div>
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>نام کارشناس</th>
-                    <th>مدت مجاز</th>
-                    <th>ساعت رفت</th>
-                    <th>ساعت برگشت</th>
-                    <th>مدت کل استراحت</th>
-                    <th>وضعیت</th>
-                </tr>
-            </thead>
-            <tbody id="historyTable"></tbody>
-        </table>
-    </div>
-</div>
-
-<script>
-    let activeRests = JSON.parse(localStorage.getItem('activeRests')) || [];
-    let historyLogs = JSON.parse(localStorage.getItem('historyLogs')) || [];
-
-    function saveData() {
-        localStorage.setItem('activeRests', JSON.stringify(activeRests));
-        localStorage.setItem('historyLogs', JSON.stringify(historyLogs));
-    }
-
-    function formatTime(timestamp) {
-        const date = new Date(timestamp);
-        return date.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    }
-
-    function formatDuration(seconds) {
-        const absSec = Math.abs(Math.floor(seconds));
-        const m = Math.floor(absSec / 60).toString().padStart(2, '0');
-        const s = (absSec % 60).toString().padStart(2, '0');
-        return (seconds < 0 ? '-' : '') + `${m}:${s}`;
-    }
-
-    function startRest() {
-        const nameInput = document.getElementById('agentName');
-        const durationSelect = document.getElementById('restDuration');
-        const name = nameInput.value.trim();
-        const allowedMinutes = parseInt(durationSelect.value);
-
-        if (!name) {
-            nameInput.focus();
-            return;
-        }
-
-        const newRest = {
-            id: Date.now(),
-            name: name,
-            allowedMinutes: allowedMinutes,
-            startTime: Date.now()
-        };
-
-        activeRests.push(newRest);
-        nameInput.value = '';
-        saveData();
-        render();
-    }
-
-    function endRest(id) {
-        const index = activeRests.findIndex(r => r.id === id);
-        if (index === -1) return;
-
-        const rest = activeRests[index];
-        const endTime = Date.now();
-        const elapsedSeconds = Math.floor((endTime - rest.startTime) / 1000);
-        const allowedSeconds = rest.allowedMinutes * 60;
-        const isLate = elapsedSeconds > allowedSeconds;
-
-        historyLogs.unshift({
-            name: rest.name,
-            allowedMinutes: rest.allowedMinutes,
-            startTime: rest.startTime,
-            endTime: endTime,
-            elapsedSeconds: elapsedSeconds,
-            isLate: isLate
-        });
-
-        activeRests.splice(index, 1);
-        saveData();
-        render();
-    }
-
-    function clearLogs() {
-        historyLogs = [];
-        saveData();
-        renderHistory();
-    }
-
-    function renderActive() {
-        const container = document.getElementById('activeList');
-        container.innerHTML = '';
-
-        activeRests.forEach(rest => {
-            const now = Date.now();
-            const elapsedSeconds = (now - rest.startTime) / 1000;
-            const remainingSeconds = (rest.allowedMinutes * 60) - elapsedSeconds;
-            const isOvertime = remainingSeconds < 0;
-
-            const card = document.createElement('div');
-            card.className = `card ${isOvertime ? 'overtime' : ''}`;
-            card.innerHTML = `
-                <div>
-                    <div class="card-header">
-                        <span class="agent-name">${rest.name}</span>
-                        <span class="badge">استراحت ${rest.allowedMinutes} دقیقه‌ای</span>
-                    </div>
-                    <div class="timer">${formatDuration(remainingSeconds)}</div>
-                    <div class="time-info">زمان خروج: ${formatTime(rest.startTime)}</div>
-                </div>
-                <button class="btn-return" onclick="endRest(${rest.id})">ثبت بازگشت</button>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function renderHistory() {
-        const tbody = document.getElementById('historyTable');
-        tbody.innerHTML = '';
-
-        historyLogs.forEach(log => {
-            const mins = Math.floor(log.elapsedSeconds / 60);
-            const secs = log.elapsedSeconds % 60;
-            const durationText = `${mins} دقیقه و ${secs} ثانیه`;
-
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><strong>${log.name}</strong></td>
-                <td>استراحت (${log.allowedMinutes} دقیقه)</td>
-                <td>${formatTime(log.startTime)}</td>
-                <td>${formatTime(log.endTime)}</td>
-                <td>${durationText}</td>
-                <td class="${log.isLate ? 'status-late' : 'status-ok'}">
-                    ${log.isLate ? 'تاخیر در بازگشت' : 'به موقع'}
-                </td>
-            `;
-            tbody.appendChild(tr);
-        });
-    }
-
-    function render() {
-        renderActive();
-        renderHistory();
-    }
-
-    document.getElementById('agentName').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') startRest();
-    });
-
-    setInterval(renderActive, 1000);
-    render();
-</script>
-
-</body>
-</html>
+            color: #34d399;
+            font
