@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>طلایین | مدیریت استراحت پشتیبانی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#FCB900;--purple:#333333;--purple2:#555555;--ink:#282333;--muted:#777184;--line:#e8e2ec;--bg:#f4f1f6;--green:#16865a;--red:#b7354b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f6f3f7,#eee9f0);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;padding:18px}
+button,input{font:inherit}button{border:0;border-radius:9px;padding:9px 13px;cursor:pointer;font-size:12px;font-weight:700}button:disabled{opacity:.5;cursor:not-allowed}
+.app{max-width:1180px;margin:auto}.brand{max-width:760px;margin:0 auto 18px;text-align:center;background:white;border:3px solid var(--gold);border-radius:22px;padding:14px;box-shadow:0 8px 24px #38204a20}
+.logo{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);font-size:clamp(27px,4vw,42px);font-weight:800}.logo-mark{width:140px;height:auto;max-height:64px;object-fit:contain;display:block}.brand small{display:block;color:#655d6c;font-size:11px}.brand h1{font-size:clamp(17px,2.4vw,22px);margin:12px 0 0}
+.panel{background:#fff;border:1px solid #e5dce9;border-radius:16px;padding:16px;box-shadow:0 5px 18px #36204410;min-width:0}.center{max-width:560px;margin:auto;border:2px solid var(--gold)}.title{font-size:15px;font-weight:800;color:var(--purple);padding-bottom:11px;margin-bottom:13px;border-bottom:1px solid var(--line)}
+input{width:100%;border:1px solid #ddd4e4;border-radius:9px;padding:11px;background:#fff;outline:none;font-size:13px;margin-bottom:9px}input:focus{border-color:var(--purple2);box-shadow:0 0 0 3px #6b37851a}
+.primary{background:var(--purple);color:white}.gold{background:var(--gold);color:#35250b}.soft{background:#f1eaf5;color:var(--purple)}.danger{background:#fae9ed;color:var(--red)}.success{background:#e5f5ed;color:var(--green)}.full{width:100%}.muted{color:var(--muted);font-size:11px;line-height:1.8}
+.auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.auth-grid button{width:100%}.hidden{display:none!important}
+.dashboard{display:grid;grid-template-columns:1fr 1.2fr;gap:14px;align-items:start}.stack{display:grid;gap:14px}
+.list{display:grid;gap:9px}.item{border:1px solid var(--line);border-radius:11px;padding:11px;background:white}.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.name{font-weight:700;font-size:13px}.status{font-size:10px;padding:4px 8px;border-radius:20px;background:#f1edf4;color:var(--muted)}.status.on{background:#e4f5ec;color:var(--green)}
+.timer{font-size:26px;font-weight:800;color:var(--purple);text-align:center;direction:ltr;font-variant-numeric:tabular-nums;margin:7px 0}.actions{display:flex;gap:7px;margin-top:9px}.actions button{flex:1}
+.report{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px}.sub{font-size:10px;color:var(--muted);margin-top:3px}.pill{background:#f4eff7;color:var(--purple);padding:4px 7px;border-radius:20px;white-space:nowrap}
+.empty{color:#9b93a2;font-size:12px;text-align:center;padding:18px 5px;border:1px dashed #ddd4e4;border-radius:10px}
+.history-section{border:1px solid #e5dce9;border-radius:16px;background:#fff;padding:0 14px 14px;box-shadow:0 5px 18px #36204410;margin-bottom:14px}
+.history-section>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 2px;font-size:14px;font-weight:800;color:var(--purple);min-height:52px}
+.history-section>summary::-webkit-details-marker{display:none}
+.history-section>summary:after{content:"⌄";font-size:20px;color:var(--gold);font-weight:800}
+.history-section[open]>summary:after{content:""}
+.history-section>summary:after{content:""}
+.summary-meta{display:flex;align-items:center;gap:12px}
+.collapse-arrow{display:inline-flex;align-items:center;justify-content:center;color:var(--gold);font-size:22px;font-weight:800;transition:transform .18s;min-width:24px}
+.history-section[open] .collapse-arrow{transform:rotate(180deg)}
+.history-tools{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.history-tools button{flex:1;min-width:130px}
+.archive-panel{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.delete-history{font-size:10px;padding:6px 9px;white-space:nowrap}
+.history-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 14px;flex-wrap:wrap}.topbar strong{font-size:13px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#2f2538;color:white;padding:10px 16px;border-radius:10px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:10}.toast.show{opacity:1}
+@media(max-width:760px){.dashboard,.grid2{grid-template-columns:1fr}}@media(max-width:480px){body{padding:10px}.panel{padding:12px}.auth-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><div class="app">
+<header class="brand"><div class="logo"><img class="logo-mark" src="https://cdn.brandfetch.io/idV7uixXf-/w/300/h/96/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&amp;t=1778623786715" alt="لوگوی طلاین"><span>سیستم مدیریت استراحت<small>سامانه کارشناسان پشتیبانی</small></span></div><h1>ثبت ورود و خروج استراحت کارشناسان پشتیبانی</h1></header>
+
+<section id="authPanel" class="panel center">
+ <div class="title">ورود به سامانه</div>
+ <input id="email" type="email" placeholder="ایمیل سازمانی" autocomplete="username">
+ <input id="password" type="password" placeholder="رمز عبور" autocomplete="current-password">
+ <div class="auth-grid"><button id="loginBtn" class="primary full" style="grid-column:1/-1">ورود</button></div>
+ <p class="muted">حساب کاربری توسط مدیر سامانه ساخته می‌شود. برای دریافت دسترسی با مدیر خود تماس بگیرید.</p>
+</section>
+
+<section id="mainPanel" class="hidden">
+ <div class="topbar"><strong id="welcome"></strong><button id="logoutBtn" class="soft">خروج از حساب</button></div>
+ <details class="history-section" id="teamStatusSection" style="margin-bottom:14px">
+  <summary><span>👥 کارشناسان آنلاین و در حال استراحت</span><span class="muted">برای نمایش وضعیت بزنید</span></summary>
+  <div id="teamStatus" class="list"><div class="empty">در حال دریافت وضعیت…</div></div>
+ </details>
+ <details class="history-section" id="teamHistorySection">
+  <summary><span>📋 آخرین سوابق استراحت همکاران</span><span class="muted">برای نمایش بزنید</span></summary>
+  <div id="teamHistory" class="list"><div class="empty">در حال دریافت سوابق…</div></div>
+  <div class="history-tools"><button class="soft" id="openArchiveBtn" type="button">مشاهده آرشیو سوابق</button></div>
+  <div id="archivePanel" class="archive-panel hidden"><div class="title">🗂️ آرشیو سوابق استراحت</div><p class="muted">سوابق در همین پایگاه داده ذخیره می‌شوند؛ این بخش فقط برای مشاهده سوابق قدیمی است و نسخه تکراری ایجاد نمی‌کند.</p><div id="archiveHistory" class="list"></div></div>
+ </details>
+ <div id="employeeView" class="dashboard hidden">
+  <section class="panel"><div class="title">☕ وضعیت استراحت من</div><div id="myActive" class="list"></div></section>
+  <section class="panel"><div class="title">☕ ثبت استراحت جدید</div>
+   <label class="muted" for="minutes">مدت استراحت (دقیقه)</label><input id="minutes" type="number" min="1" max="60" value="15">
+   <button id="startBreak" class="gold full">شروع استراحت</button><p class="muted">شروع و پایان استراحت در گزارش سامانه ثبت می‌شود. مدت مجاز را طبق دستورالعمل شرکت وارد کنید.</p>
+   <div class="title" style="margin-top:16px">📅 رزرو استراحت آینده</div>
+   <label class="muted" for="reservationAt">تاریخ و ساعت شروع</label><input id="reservationAt" type="datetime-local">
+   <p class="muted" style="margin:-3px 0 10px">⏱️ توجه: فقط می‌توانید برای حداکثر یک ساعت آینده رزرو استراحت ثبت کنید.</p>
+   <label class="muted" for="reservationMinutes">مدت رزرو (دقیقه)</label><input id="reservationMinutes" type="number" min="1" max="60" value="15">
+   <button id="reserveBreak" class="primary full">ثبت رزرو استراحت</button>
+   <div id="myReservations" class="list" style="margin-top:10px"></div>
+   <details class="history-section" style="margin-top:16px" id="myHistorySection">
+    <summary><span>🕒 سوابق استراحت من</span><span class="muted">برای نمایش بزنید</span></summary>
+    <div id="myHistory" class="list"></div>
+   </details>
+  </section>
+ </div>
+ <div id="adminView" class="hidden stack">
+  <section class="panel"><div class="title">➕ ایجاد حساب کارمند</div>
+   <div class="grid2"><div><label class="muted" for="newEmployeeName">نام کارمند</label><input id="newEmployeeName" placeholder="نام و نام خانوادگی"></div><div><label class="muted" for="newEmployeeEmail">ایمیل سازمانی</label><input id="newEmployeeEmail" type="email" placeholder="name@example.com"></div><div><label class="muted" for="newEmployeePassword">رمز عبور اولیه</label><input id="newEmployeePassword" type="password" minlength="8" placeholder="حداقل ۸ کاراکتر"></div><div style="display:flex;align-items:end"><button id="createEmployeeBtn" class="gold full">ساخت حساب کارمند</button></div></div>
+   <p class="muted">در نسخه رایگان، مدیر حساب را از Firebase Console ایجاد می‌کند؛ سپس کارمند با ایمیل و رمز خود وارد سامانه می‌شود.</p>
+  </section>
+  <div class="grid2">
+   <details class="history-section" id="adminPresenceSection">
+    <summary><span>👥 کارشناسان آنلاین و در حال استراحت</span><span class="muted">برای نمایش وضعیت بزنید</span></summary>
+    <div id="adminActive" class="list"></div>
+   </details>
+   <details class="history-section" id="adminUsersSection">
+    <summary><span>👤 کاربران ثبت‌نام‌شده</span><span class="muted">برای نمایش فهرست بزنید</span></summary>
+    <div id="usersList" class="list"></div><p class="muted">ساخت حساب جدید فقط از همین پنل مدیر انجام می‌شود. برای یکسان‌سازی پروفایل‌های قدیمی و اصلاح فیلد ایمیل، از دکمه زیر استفاده کنید.</p><button id="repairProfilesBtn" class="soft">راهنمای بررسی پروفایل‌های قدیمی</button>
+   </details>
+  </div>
+  <details class="history-section" id="adminReportsSection">
+   <summary><span>📊 گزارش ترددها</span><span class="summary-meta"><span class="muted">برای مشاهده گزارش‌ها بزنید</span><span class="collapse-arrow" aria-hidden="true">⌄</span></span></summary>
+   <div id="adminReports" class="list"></div>
+   <div class="history-tools"><button id="resetBreakHistoryBtn" class="danger" type="button">🗑️ پاک‌سازی سوابق استراحت قبلی</button></div>
+   <p class="muted">این عملیات فقط سوابق پایان‌یافته استراحت را حذف می‌کند؛ رزروهای آینده، حساب کاربران و سوابق استراحت فعال دست‌نخورده می‌مانند.</p>
+  </details>
+  <section class="panel"><div class="title">📅 رزروهای استراحت کارشناسان</div><div id="adminReservations" class="list"></div></section>
+ </div>
+</section>
+</div><div id="toast" class="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, orderBy, limit, onSnapshot, updateDoc, serverTimestamp, Timestamp, deleteDoc, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// پیکربندی برنامه وب Firebase پروژه taline-support
+const firebaseConfig = {
+  apiKey: "AIzaSyDnPkTf_-LAKk1RH_ZxAIBrSIaOvBUpVT8",
+  authDomain: "taline-support.firebaseapp.com",
+  projectId: "taline-support",
+  storageBucket: "taline-support.firebasestorage.app",
+  messagingSenderId: "710385716582",
+  appId: "1:710385716582:web:ef223232149e73ad118ca7",
+  measurementId: "G-MG0BWXFJ64"
+};
+const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app);
+const $=id=>document.getElementById(id);
+let currentUser=null, profile=null, unsubscribers=[], mySessions=[], allSessions=[], usersCache=[], presenceCache=[], reservationsCache=[], presenceTimer=null;
+// همه سوابق واقعی Firestore نمایش داده می‌شوند؛ پاک‌سازی فقط با اقدام صریح مدیر انجام می‌شود.
+function visibleHistory(rows){return rows;}
+function toast(s){const t=$('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
+function fa(n){return new Intl.NumberFormat('fa-IR').format(n)}
+function dateTime(ts){return ts?.toDate?ts.toDate().toLocaleString('fa-IR',{dateStyle:'short',timeStyle:'short'}):'—'}
+function timer(ms){let sec=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0')}
+function clearSubs(){unsubscribers.forEach(fn=>fn());unsubscribers=[]}
+function show(el,on){$(el).classList.toggle('hidden',!on)}
+function escapeText(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+$('loginBtn').onclick=async()=>{try{await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value)}catch(e){toast(errorText(e))}};
+$('repairProfilesBtn').onclick=()=>{toast('ترمیم خودکار پروفایل در نسخه رایگان غیرفعال است؛ نقش‌ها و پروفایل‌ها را فعلاً از کنسول Firebase بررسی کنید.')};
+$('createEmployeeBtn').onclick=()=>{toast('برای حفظ امنیت و کنترل مدیر، ساخت حساب جدید را از Firebase Console انجام دهید؛ راهنما در فایل README همراه نسخه قرار دارد.')};
+$('logoutBtn').onclick=async()=>{await markPresence(false);await signOut(auth)};
+$('startBreak').onclick=async()=>{const mins=Number($('minutes').value);if(!Number.isInteger(mins)||mins<1||mins>60){toast('مدت باید بین ۱ تا ۶۰ دقیقه باشد');return}if(mySessions.some(s=>s.status==='active')){toast('شما یک استراحت فعال دارید');return}try{await addDoc(collection(db,'breakSessions'),{employeeUid:currentUser.uid,employeeEmail:currentUser.email,employeeName:profile.displayName||currentUser.email,plannedMinutes:mins,startAt:serverTimestamp(),startAtClient:Timestamp.now(),endAt:null,status:'active',createdAt:serverTimestamp()});toast('شروع استراحت ثبت شد')}catch(e){toast(errorText(e))}};
+function localDateTimeValue(date){const pad=n=>String(n).padStart(2,'0');return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`}
+function refreshReservationLimits(){const input=$('reservationAt');if(!input)return;const now=new Date();input.min=localDateTimeValue(new Date(now.getTime()+60000));input.max=localDateTimeValue(new Date(now.getTime()+60*60000))}
+refreshReservationLimits();$('reservationAt').addEventListener('focus',refreshReservationLimits);
+$('reserveBreak').onclick=async()=>{
+ refreshReservationLimits();
+ const raw=$('reservationAt').value, mins=Number($('reservationMinutes').value), when=new Date(raw), now=Date.now();
+ if(!raw||Number.isNaN(when.getTime())||when.getTime()<=now+60000){toast('زمان رزرو باید حداقل یک دقیقه در آینده باشد');return}
+ if(when.getTime()>now+60*60000){toast('رزرو فقط برای حداکثر یک ساعت آینده امکان‌پذیر است');return}
+ if(!Number.isInteger(mins)||mins<1||mins>60){toast('مدت رزرو باید بین ۱ تا ۶۰ دقیقه باشد');return}
+ if(reservationsCache.some(r=>r.status==='booked'&&Math.abs(r.startAt?.toDate?.().getTime()-when.getTime())<r.plannedMinutes*60000)){toast('با یکی از رزروهای قبلی تداخل دارد');return}
+ try{await addDoc(collection(db,'breakReservations'),{employeeUid:currentUser.uid,employeeEmail:currentUser.email,employeeName:profile.displayName||currentUser.email, startAt:Timestamp.fromDate(when),plannedMinutes:mins,status:'booked',createdAt:serverTimestamp()});toast('رزرو استراحت ثبت شد');$('reservationAt').value=''}catch(e){toast(errorText(e))}
+};
+function errorText(e){console.error('[Taline app error]',{code:e?.code,message:e?.message,name:e?.name,customData:e?.customData});const m=e?.code||'';return ({'auth/invalid-email':'فرمت ایمیل معتبر نیست','auth/missing-password':'رمز عبور را وارد کنید','auth/weak-password':'رمز عبور باید حداقل ۶ کاراکتر باشد','auth/email-already-in-use':'این ایمیل قبلاً ثبت شده است','auth/invalid-credential':'ایمیل یا رمز عبور اشتباه است','auth/network-request-failed':'ارتباط با Firebase برقرار نشد؛ اینترنت، VPN/Proxy، افزونه‌های مسدودکننده و دسترسی شبکه را بررسی کنید','permission-denied':'دسترسی مجاز نیست؛ قوانین و نقش حساب را بررسی کنید'})[m]||('خطا: '+(e?.message||'عملیات انجام نشد'))}
+
+async function markPresence(online=true){if(!currentUser)return;try{await setDoc(doc(db,'presence',currentUser.uid),{uid:currentUser.uid,email:currentUser.email||'',displayName:profile?.displayName||currentUser.email||'کارشناس',online,lastSeen:serverTimestamp()},{merge:true})}catch(e){console.warn('presence update failed',e)}}
+function startPresence(){if(presenceTimer)clearInterval(presenceTimer);markPresence(true);presenceTimer=setInterval(()=>{if(currentUser)markPresence(true);renderTeam()},60000)}
+function stopPresence(){if(presenceTimer){clearInterval(presenceTimer);presenceTimer=null}}
+
+onAuthStateChanged(auth,async user=>{
+ clearSubs();stopPresence();currentUser=user;profile=null;
+ if(!user){show('authPanel',true);show('mainPanel',false);return}
+ try{const snap=await getDoc(doc(db,'users',user.uid));if(!snap.exists()){await signOut(auth);toast('پروفایل کاربر پیدا نشد');return}profile=snap.data();show('authPanel',false);show('mainPanel',true);$('welcome').textContent=(profile.displayName||user.email)+' — '+(profile.role==='admin'?'مدیر سامانه':'کارشناس');const admin=profile.role==='admin';show('adminView',admin);show('employeeView',true);startPresence();subscribeShared()}catch(e){toast(errorText(e))}
+});
+function subscribeShared(){
+ const q=query(collection(db,'breakSessions'),orderBy('startAtClient','desc'),limit(200));
+ unsubscribers.push(onSnapshot(q,s=>{allSessions=s.docs.map(d=>({id:d.id,...d.data()}));mySessions=allSessions.filter(x=>x.employeeUid===currentUser.uid);renderEmployee();renderTeam();renderTeamHistory();if(profile?.role==='admin')renderAdmin()},e=>toast(errorText(e))));
+ unsubscribers.push(onSnapshot(collection(db,'users'),s=>{usersCache=s.docs.map(d=>({id:d.id,...d.data()}));renderUsers();renderTeam()},e=>toast(errorText(e))));
+ unsubscribers.push(onSnapshot(collection(db,'presence'),s=>{presenceCache=s.docs.map(d=>({id:d.id,...d.data()}));renderTeam()},e=>toast(errorText(e))));
+ unsubscribers.push(onSnapshot(query(collection(db,'breakReservations'),orderBy('startAt','asc'),limit(200)),s=>{reservationsCache=s.docs.map(d=>({id:d.id,...d.data()}));renderReservations();if(profile?.role==='admin')renderAdminReservations()},e=>toast(errorText(e))));
+}
+function renderEmployee(){
+ const active=mySessions.filter(s=>s.status==='active');$('myActive').innerHTML=active.length?active.map(s=>`<div class="item"><div class="row"><b class="name">استراحت فعال</b><span class="status on">در حال استراحت</span></div><div class="timer" data-end="${s.startAtClient?.toMillis?.()||Date.now()}" data-min="${s.plannedMinutes}">--:--</div><button class="danger full" data-finish="${s.id}">ثبت بازگشت</button></div>`).join(''):'<div class="empty">در حال حاضر استراحت فعالی ندارید</div>';
+ const myVisibleHistory=visibleHistory(mySessions);
+ $('myHistory').innerHTML=myVisibleHistory.length?myVisibleHistory.map(s=>`<div class="item report"><div><b>${escapeText(s.status==='active'?'استراحت فعال':'استراحت پایان‌یافته')}</b><div class="sub">شروع: ${dateTime(s.startAtClient)}${s.endAtClient?' • پایان: '+dateTime(s.endAtClient):''}</div></div><span class="pill">${fa(s.plannedMinutes)} دقیقه</span></div>`).join(''):'<div class="empty">هنوز سابقه‌ای ثبت نشده است</div>';
+}
+function renderTeam(){
+ const pmap=new Map(presenceCache.map(p=>[p.uid||p.id,p]));const activeMap=new Map();allSessions.filter(x=>x.status==='active').forEach(x=>activeMap.set(x.employeeUid,x));
+ if($('adminActive'))$('adminActive').innerHTML=usersCache.length?usersCache.map(u=>{const pr=pmap.get(u.id),seen=pr?.lastSeen?.toDate?pr.lastSeen.toDate().getTime():0,online=!!pr?.online&&Date.now()-seen<150000,active=activeMap.get(u.id);return `<div class="item"><div class="row"><b class="name">${escapeText(u.displayName||u.email)}</b><span class="status ${active||online?'on':''}">${active?'در حال استراحت':online?'آنلاین ـ مشغول کار':'آفلاین'}</span></div><div class="sub">${escapeText(u.email||'')} ${active?' • شروع استراحت: '+dateTime(active.startAtClient):''}</div></div>`}).join(''):'<div class="empty">کاربری ثبت نشده است</div>';
+ $('teamStatus').innerHTML=usersCache.length?usersCache.map(u=>{const pr=pmap.get(u.id),seen=pr?.lastSeen?.toDate?pr.lastSeen.toDate().getTime():0,online=!!pr?.online&&Date.now()-seen<150000,active=activeMap.get(u.id);return `<div class=\"item\"><div class=\"row\"><b class=\"name\">${escapeText(u.displayName||u.email)}</b><span class=\"status ${active||online?'on':''}\">${active?'در حال استراحت':online?'آنلاین ـ مشغول کار':'آفلاین'}</span></div></div>`}).join(''):'<div class=\"empty\">کاربری ثبت نشده است</div>';
+}
+function historyRow(s,canDelete=false){return `<div class="item"><div class="history-row"><div><b>${escapeText(s.employeeName||s.employeeEmail||'کارشناس')}</b><div class="sub">${dateTime(s.startAtClient)}${s.endAtClient?' • پایان: '+dateTime(s.endAtClient):' • در حال استراحت'}</div><div class="sub">${fa(s.plannedMinutes||0)} دقیقه • ${s.status==='active'?'در حال استراحت':'پایان‌یافته'}</div></div>${canDelete?`<button class="danger delete-history" data-delete-session="${s.id}">حذف سابقه</button>`:''}</div></div>`}
+function renderTeamHistory(){const rows=visibleHistory(allSessions).filter(s=>s.status!=='active').slice(0,5);$('teamHistory').innerHTML=rows.length?rows.map(s=>historyRow(s,false)).join(''):'<div class="empty">هنوز سابقه جدیدی ثبت نشده است</div>';const archiveRows=visibleHistory(allSessions).filter(s=>s.status!=='active');if($('archiveHistory'))$('archiveHistory').innerHTML=archiveRows.length?archiveRows.map(s=>historyRow(s,profile?.role==='admin')).join(''):'<div class="empty">آرشیو سوابق جدید فعلاً خالی است</div>'}
+
+function renderReservations(){const mine=reservationsCache.filter(r=>r.employeeUid===currentUser.uid);$('myReservations').innerHTML=mine.length?mine.map(r=>{const when=r.startAt?.toDate?.()||new Date();const canStart=r.status==='booked'&&when.getTime()<=Date.now()+60000;return `<div class="item"><div class="row"><b class="name">${dateTime(r.startAt)}</b><span class="status ${r.status==='booked'?'on':''}">${r.status==='booked'?'رزرو شده':r.status==='started'?'شروع شده':'لغو شده'}</span></div><div class="sub">${fa(r.plannedMinutes)} دقیقه</div><div class="actions">${canStart?`<button class="success" data-start-reservation="${r.id}">شروع استراحت</button>`:''}${r.status==='booked'?`<button class="danger" data-cancel-reservation="${r.id}">لغو رزرو</button>`:''}</div></div>`}).join(''):'<div class="empty">رزروی ثبت نشده است</div>'}
+function renderAdminReservations(){$('adminReservations').innerHTML=reservationsCache.length?reservationsCache.map(r=>`<div class="item report"><div><b>${escapeText(r.employeeName||r.employeeEmail)}</b><div class="sub">${dateTime(r.startAt)} • ${fa(r.plannedMinutes)} دقیقه</div></div><span class="pill">${r.status==='booked'?'رزرو شده':r.status==='started'?'شروع شده':'لغو شده'}</span></div>`).join(''):'<div class="empty">رزروی ثبت نشده است</div>'}
+function renderAdmin(){
+ const reportRows=visibleHistory(allSessions);
+ $('adminReports').innerHTML=reportRows.length?reportRows.map(s=>`<div class="item report"><div><b>${escapeText(s.employeeName||s.employeeEmail)}</b><div class="sub">${dateTime(s.startAtClient)} ${s.endAtClient?' • پایان: '+dateTime(s.endAtClient):' • هنوز فعال'}</div></div><span class="pill">${fa(s.plannedMinutes)} دقیقه</span></div>`).join(''):'<div class="empty">گزارشی ثبت نشده است</div>';
+}
+function renderUsers(){$('usersList').innerHTML=usersCache.length?usersCache.map(u=>`<div class="item report"><div><b>${escapeText(u.displayName||u.email)}</b><div class="sub">${escapeText(u.email)}</div></div><span class="pill">${u.role==='admin'?'مدیر':'کارشناس'}</span></div>`).join(''):'<div class="empty">کاربری ثبت نشده است</div>'}
+document.addEventListener('click',async e=>{
+ const archiveBtn=e.target.closest('#openArchiveBtn');if(archiveBtn){$('archivePanel').classList.toggle('hidden');archiveBtn.textContent=$('archivePanel').classList.contains('hidden')?'مشاهده آرشیو سوابق':'بستن آرشیو';renderTeamHistory();return}
+ const del=e.target.closest('[data-delete-session]');if(del){if(profile?.role!=='admin'){toast('فقط مدیر می‌تواند سابقه را حذف کند');return}const rec=allSessions.find(x=>x.id===del.dataset.deleteSession);if(!rec){toast('سابقه پیدا نشد');return}const label=(rec.employeeName||rec.employeeEmail||'کارمند')+' — '+dateTime(rec.startAtClient);if(!confirm('این سابقه برای همیشه حذف شود؟\n'+label+'\nاین کار قابل بازگشت نیست.'))return;try{await deleteDoc(doc(db,'breakSessions',rec.id));toast('سابقه حذف شد')}catch(err){toast(errorText(err))}return}
+ const resetBtn=e.target.closest('#resetBreakHistoryBtn');if(resetBtn){
+  if(profile?.role!=='admin'){toast('فقط مدیر می‌تواند سوابق را پاک‌سازی کند');return}
+  const ok=confirm('تمام سوابق پایان‌یافته استراحت همه کارکنان برای همیشه حذف می‌شود. حساب‌ها، رزروهای آینده و استراحت‌های فعال حذف نمی‌شوند. ادامه می‌دهید؟');
+  if(!ok)return;
+  const typed=prompt('برای تأیید حذف دائمی، عبارت «حذف سوابق» را دقیقاً وارد کنید:');
+  if(typed!=='حذف سوابق'){toast('پاک‌سازی لغو شد');return}
+  try{
+   resetBtn.disabled=true;resetBtn.textContent='در حال پاک‌سازی…';
+   let removed=0;
+   const snap=await getDocs(collection(db,'breakSessions'));
+   const targets=snap.docs.filter(d=>d.data().status!=='active');
+   for(let i=0;i<targets.length;i+=450){
+    const batch=writeBatch(db);targets.slice(i,i+450).forEach(d=>batch.delete(d.ref));
+    await batch.commit();removed+=Math.min(450,targets.length-i);
+   }
+   toast(`${fa(removed)} سابقه پایان‌یافته حذف شد`);
+  }catch(err){toast('پاک‌سازی انجام نشد: '+errorText(err))}
+  finally{resetBtn.disabled=false;resetBtn.textContent='🗑️ پاک‌سازی سوابق استراحت قبلی'}
+  return;
+ }
+ const finish=e.target.closest('[data-finish]');if(finish){try{await updateDoc(doc(db,'breakSessions',finish.dataset.finish),{status:'completed',endAt:serverTimestamp(),endAtClient:Timestamp.now()});toast('پایان استراحت ثبت شد')}catch(err){toast(errorText(err))}return}
+ const cancel=e.target.closest('[data-cancel-reservation]');if(cancel){try{await updateDoc(doc(db,'breakReservations',cancel.dataset.cancelReservation),{status:'cancelled',updatedAt:serverTimestamp()});toast('رزرو لغو شد')}catch(err){toast(errorText(err))}return}
+ const start=e.target.closest('[data-start-reservation]');if(start){const r=reservationsCache.find(x=>x.id===start.dataset.startReservation);if(!r||mySessions.some(x=>x.status==='active')){toast('ابتدا استراحت فعال خود را بررسی کنید');return}try{await addDoc(collection(db,'breakSessions'),{employeeUid:currentUser.uid,employeeEmail:currentUser.email,employeeName:profile.displayName||currentUser.email,plannedMinutes:r.plannedMinutes,startAt:serverTimestamp(),startAtClient:Timestamp.now(),endAt:null,status:'active',createdAt:serverTimestamp(),reservationId:r.id});await updateDoc(doc(db,'breakReservations',r.id),{status:'started',updatedAt:serverTimestamp()});toast('استراحت رزروشده شروع شد')}catch(err){toast(errorText(err))}return}
+});
+function updateTimers(){document.querySelectorAll('[data-end]').forEach(el=>{const start=Number(el.dataset.end),end=start+Number(el.dataset.min)*60000;el.textContent=timer(end-Date.now());if(end<Date.now())el.style.color='var(--red)'})}
+setInterval(updateTimers,1000);
+</script>
+</body></html>
